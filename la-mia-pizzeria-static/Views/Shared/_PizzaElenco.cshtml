@@ -1,0 +1,14 @@
+﻿@model Pizza;
+@{
+    var pizza = Model;
+}
+
+<tr>
+    <td>@pizza.Id</td>
+    <td>
+        <a href="@Url.Action("Detail", "Pizza", new{Id = pizza.Id})">@pizza.Nome</a>
+    </td>
+    <td>@pizza.Descrizione</td>
+    <td><img src="@pizza.Foto" /></td>
+    <td>@pizza.Prezzo</td>
+</tr>

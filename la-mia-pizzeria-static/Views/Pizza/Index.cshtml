@@ -1,0 +1,61 @@
+﻿@model Pizza[]
+@{
+    ViewData["Title"] = "index";
+    var pizzas = Model;
+}
+
+@section Styles
+{
+    <style>
+        main {
+            text-align: center;
+        }
+
+        .bor-tab {
+            border: 1px solid black;
+            margin: auto;
+        }
+
+        th, td, tr {
+            border: 1px solid black;
+            height: 100px;
+            width: 200px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+}
+
+<button class="btn-create">
+    <a href="@Url.Action("Create", "Pizza")">Aggiungi una nuova pizza</a>
+</button>
+
+@if(pizzas.Length == 0)
+{
+    <h2>Non ci sono pizze da mostrare</h2>
+}
+else
+{
+
+    <table class="bor-tab">
+        <tr>
+            <th><h3>Id</h3></th>
+            <th><h3>Nome</h3></th>
+            <th><h3>Descrizione</h3></th>
+            <th><h3>Foto</h3></th>
+            <th><h3>Prezzo</h3></th>
+        </tr>
+        @foreach (var pizza in pizzas)
+        {
+            @await Html.PartialAsync("_PizzaElenco", pizza);
+        }
+    </table>
+}
+
+
+
+
+

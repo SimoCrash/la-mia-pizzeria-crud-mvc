@@ -1,0 +1,100 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* HEADER */
+
+header {
+    box-shadow: grey 0 0 5px;
+    background-color: whitesmoke;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+header li {
+    list-style: none;
+}
+header h1, header h2 {
+    text-align: center;
+}
+
+
+/* INDEX */
+.btn-create {
+    margin: 20px;
+}
+
+.btn-create a {
+    text-decoration: none;
+}
+
+/* DETAIL */
+.container-detail {
+    width: 500px;
+    height: 400px;
+    margin: auto;
+    text-align: center;
+    border: 2px solid red;
+    border-radius: 5px;
+    padding: 50px;
+    box-sizing: content-box;
+}
+
+.container-detail-img img {
+    width: 300px;
+    height: 200px;
+}
+
+
+/* CREATE */
+
+h2 {
+    text-align: center;
+}
+
+.container-form {
+    width: 500px;
+    border: 1px solid grey;
+    padding: 10px;
+    margin: auto;
+}
+
+.container-form input {
+    width: 100%;
+}
+
+.container-form label {
+    display: block;
+    margin: 0px 10px;
+}
+
+.container-form span {
+    font-size: 12px;
+    color: red;
+}
+
+.container-form button {
+    display: block;
+    margin: 10px auto;
+    width: 100px;
+    border: 1px solid green;
+}
+
+
+
+
