@@ -11,4 +11,7 @@
     <td>@pizza.Descrizione</td>
     <td><img src="@pizza.Foto" /></td>
     <td>@pizza.Prezzo</td>
+    <td>
+        <a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a>
+    </td>
 </tr>
