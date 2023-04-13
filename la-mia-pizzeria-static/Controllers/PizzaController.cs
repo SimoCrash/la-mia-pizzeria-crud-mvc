@@ -92,6 +92,23 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Delete(int id)
+        {
+            using var ctx = new PizzeriaContext();
+            var pizzaToDelete = ctx.Pizzas.FirstOrDefault(p => p.Id == id);
+
+            if (pizzaToDelete == null)
+            {
+                return View($"Non è stato trovato l'id n° {id}");
+            }
+            
+            ctx.Pizzas.Remove(pizzaToDelete);
+            ctx.SaveChanges();
+
+            return RedirectToAction("Index");
+           
+        }
+
         public IActionResult Privacy()
         {
             return View();

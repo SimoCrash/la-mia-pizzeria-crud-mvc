@@ -12,6 +12,7 @@
     <td><img src="@pizza.Foto" /></td>
     <td>@pizza.Prezzo</td>
     <td>
-        <a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a>
+        <button class="btn-edit"><a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a></button>
+        <button class="btn-delete"><a href="@Url.Action("Delete", "Pizza", new { Id = pizza.Id })">Delete</a></button>
     </td>
 </tr>
