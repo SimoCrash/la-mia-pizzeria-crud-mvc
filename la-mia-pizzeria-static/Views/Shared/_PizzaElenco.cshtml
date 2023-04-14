@@ -13,6 +13,12 @@
     <td>@pizza.Prezzo</td>
     <td>
         <button class="btn-edit"><a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a></button>
-        <button class="btn-delete"><a href="@Url.Action("Delete", "Pizza", new { Id = pizza.Id })">Delete</a></button>
+        <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn-delete">Delete</button>
+        </form>
     </td>
 </tr>
+
+
+

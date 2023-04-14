@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 namespace la_mia_pizzeria_static.Models
 {
     public class PizzeriaContext : DbContext
     {
         public DbSet<Pizza> Pizzas { get; set; }
+        public DbSet<Categoria> Categorie { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,6 +45,11 @@ namespace la_mia_pizzeria_static.Models
                 Pizzas.AddRange(seed);
 
                 SaveChanges();
+            }
+
+            if (!Categorie.Any())
+            {
+                var seed = 
             }
         }
     }

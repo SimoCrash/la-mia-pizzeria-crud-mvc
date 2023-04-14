@@ -92,6 +92,7 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             using var ctx = new PizzeriaContext();

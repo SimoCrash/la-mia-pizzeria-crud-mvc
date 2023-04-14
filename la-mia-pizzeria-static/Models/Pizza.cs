@@ -16,11 +16,14 @@ namespace la_mia_pizzeria_static.Models
         [Required(ErrorMessage = "Inserisci la Descrizione della pizza che vuoi aggiungere.")]
         public string Descrizione { get; set; } = string.Empty;
 
-        [Required(ErrorMessage = "Inserisci una foto della pizza che vuoi aggiungere.")]
         public string? Foto { get; set; }
 
-        [Required(ErrorMessage = "Inserisci il Prezzo della pizza che vuoi aggiungere.")]
-        [Range(1, 30, ErrorMessage = "Inserisci il Prezzo della pizza che vuoi aggiungere, superiore a 1.")]
+        //public byte[]? Immagine { get; set; }
+
+        //public string ImgSrc => Immagine is null ? Foto : $"data:image/png;base64, {Convert.ToBase64String(Immagine)}";
+
+        //[Required(ErrorMessage = "Inserisci il Prezzo della pizza che vuoi aggiungere.")]
+        //[Range(1, 30, ErrorMessage = "Inserisci il Prezzo della pizza che vuoi aggiungere, superiore a 1.")]
         public string Prezzo { get; set; } = string.Empty;
     }
 }

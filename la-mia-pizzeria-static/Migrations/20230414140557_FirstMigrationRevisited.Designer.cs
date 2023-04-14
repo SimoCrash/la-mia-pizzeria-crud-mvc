@@ -11,8 +11,8 @@ using la_mia_pizzeria_static.Models;
 namespace la_mia_pizzeria_static.Migrations
 {
     [DbContext(typeof(PizzeriaContext))]
-    [Migration("20230412181300_UpdatePizzaInModel")]
-    partial class UpdatePizzaInModel
+    [Migration("20230414140557_FirstMigrationRevisited")]
+    partial class FirstMigrationRevisited
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,6 +38,9 @@ namespace la_mia_pizzeria_static.Migrations
 
                     b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Immagine")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Nome")
                         .IsRequired()

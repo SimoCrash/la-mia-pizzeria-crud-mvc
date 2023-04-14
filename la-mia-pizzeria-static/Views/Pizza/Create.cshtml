@@ -7,7 +7,7 @@
 <h2>Crea una nuova Pizza</h2>
 <div>
     <div class="container-form">
-        <form method="post" asp-asp-controller="Pizza" asp-action="Create">
+        <form method="post" asp-asp-controller="Pizza" asp-action="Create" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
             <div>
                 <label asp-for="Nome">Nome</label>
