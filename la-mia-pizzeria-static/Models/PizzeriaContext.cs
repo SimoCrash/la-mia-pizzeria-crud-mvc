@@ -16,10 +16,8 @@ namespace la_mia_pizzeria_static.Models
 
         public void Seed()
         {
-            if (!Pizzas.Any())
+            var pizzaSeed = new Pizza[]
             {
-                var seed = new Pizza[]
-                {
                     new Pizza
                     {
                         Nome = "Regina Margherita",
@@ -41,16 +39,40 @@ namespace la_mia_pizzeria_static.Models
                         Foto = "/img/americana.jpg",
                         Prezzo = "8.00€"
                     }
-                };
-                Pizzas.AddRange(seed);
+            };
 
-                SaveChanges();
+            if (!Pizzas.Any())
+            {
+                Pizzas.AddRange(pizzaSeed);
             }
 
             if (!Categorie.Any())
             {
-                var seed = 
+                var seed = new Categoria[]
+                {
+                    new()
+                    {
+                        Title = "Pizza classica",
+                        Pizzas = pizzaSeed,
+                    },
+                    new()
+                    {
+                        Title = "Pizza Rossa",
+                    },
+                    new()
+                    {
+                        Title = "Pizza Bianca",
+                    },
+                    new()
+                    {
+                        Title = "Pizza gluten-free",
+                    }
+                };
+
+                Categorie.AddRange(seed);
             }
+
+            SaveChanges();
         }
     }
 }

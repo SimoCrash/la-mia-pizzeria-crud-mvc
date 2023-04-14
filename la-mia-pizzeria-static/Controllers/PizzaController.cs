@@ -28,11 +28,14 @@ namespace la_mia_pizzeria_static.Controllers
 
         public IActionResult Create()
         {
-            var pizza = new Pizza
+            using var ctx = new PizzeriaContext();
+
+            var formModel = new PizzaFormModel
             {
-                Foto = "https://picsum.photos/200/300",
+                Categorie = ctx.Categorie.ToArray(),
             };
-            return View(pizza);
+
+            return View(formModel);
         }
 
         [HttpPost]

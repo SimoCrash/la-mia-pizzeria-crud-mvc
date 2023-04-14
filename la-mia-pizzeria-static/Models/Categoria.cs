@@ -4,7 +4,7 @@ namespace la_mia_pizzeria_static.Models
 {
     public class Categoria
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         
         [Required(ErrorMessage = "Inserisci un titolo alla categoria.")]
         [StringLength(100, ErrorMessage = "Inserisci un titolo di massimo 100 caratteri.")]
