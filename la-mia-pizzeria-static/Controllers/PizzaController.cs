@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_static.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using static System.Net.WebRequestMethods;
 
 namespace la_mia_pizzeria_static.Controllers
@@ -9,14 +10,14 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Index()
         {
             using var ctx = new PizzeriaContext();
-            var pizzas = ctx.Pizzas.ToArray();
+            var pizzas = ctx.Pizzas.Include(p => p.Categoria).ToArray();
             return View(pizzas);
         }
 
         public IActionResult Detail(int id)
         {
             using var ctx = new PizzeriaContext();
-            var pizza = ctx.Pizzas.SingleOrDefault(p => p.Id == id);
+            var pizza = ctx.Pizzas.Include(p => p.Categoria).SingleOrDefault(p => p.Id == id);
 
             if(pizza == null)
             {
@@ -80,13 +81,14 @@ namespace la_mia_pizzeria_static.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Update(int id, PizzaFormModel form)
         {
+            using var ctx = new PizzeriaContext();
 
-            if(!ModelState.IsValid)
-            { 
+            if (!ModelState.IsValid)
+            {
+                //form.Categorie = ctx.Categorie.ToArray();                             =============> dà problemi
                 return View(form); 
             }
 
-            using var ctx = new PizzeriaContext();
             var pizzaToUpdate = ctx.Pizzas.FirstOrDefault(p => p.Id == id);
 
             if(pizzaToUpdate == null)
@@ -98,6 +100,9 @@ namespace la_mia_pizzeria_static.Controllers
             pizzaToUpdate.Descrizione = form.Pizza.Descrizione;
             pizzaToUpdate.Foto = form.Pizza.Foto;    
             pizzaToUpdate.Prezzo = form.Pizza.Prezzo;
+            pizzaToUpdate.CategoriaId = form.Pizza.CategoriaId;
+            pizzaToUpdate.Categoria = form.Pizza.Categoria;
+
 
             ctx.SaveChanges();
 

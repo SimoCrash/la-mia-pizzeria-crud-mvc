@@ -11,6 +11,7 @@
     <td>@pizza.Descrizione</td>
     <td><img src="@pizza.Foto" /></td>
     <td>@pizza.Prezzo</td>
+    <td>@pizza.Categoria!.Title</td>
     <td>
         <button class="btn-edit"><a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a></button>
         <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
