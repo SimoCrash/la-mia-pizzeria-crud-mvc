@@ -40,16 +40,18 @@ namespace la_mia_pizzeria_static.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza pizza)
+        public IActionResult Create(PizzaFormModel form)
         {
-            if(!ModelState.IsValid)
-            {
-                return View(pizza);
-            }
-            
             using var ctx = new PizzeriaContext();
 
-            ctx.Pizzas.Add(pizza);
+            if (!ModelState.IsValid)
+            {
+                form.Categorie = ctx.Categorie.ToArray();
+                return View(form);
+            }
+            
+
+            ctx.Pizzas.Add(form.Pizza);
             ctx.SaveChanges(); //Attenzione dà problemi dopo UpdatesPizzaInModel e database update se non inserisci l'img
 
             return RedirectToAction("Index");
@@ -60,11 +62,18 @@ namespace la_mia_pizzeria_static.Controllers
             using var ctx = new PizzeriaContext();
             var pizza = ctx.Pizzas.FirstOrDefault(p => p.Id == id);
 
-            if(pizza == null)
+            if (pizza == null)
             {
                 return View($"Non è stato trovato l'id n° {id}");
             }
-            return View(pizza);
+
+            var formModel = new PizzaFormModel
+            {
+                Pizza = pizza,
+                Categorie = ctx.Categorie.ToArray(),
+            };
+
+            return View(formModel);
         }
 
         [HttpPost] 
