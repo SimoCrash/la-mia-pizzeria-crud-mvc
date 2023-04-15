@@ -6,6 +6,7 @@
     <div class="container-form">
         <form method="post" asp-asp-controller="Pizza" asp-action="Update" asp-route-id="@Model.Pizza.Id" enctype="multipart/form-data">
             @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Pizza.Id" />
             <div>
                 <label asp-for="Pizza.Nome">Nome</label>
                 <input asp-for="Pizza.Nome" />
@@ -29,20 +30,13 @@
             <div>
                 <label asp-for="Pizza.CategoriaId">Categoria</label>
                 <select asp-for="Pizza.CategoriaId">
-                    <option value=""></option>
+                    <option value="0"></option>
                     @foreach (Categoria categoria in Model.Categorie)
                     {
-                        @if (Model.Pizza.CategoriaId == categoria.Id)
-                        {
-                            <option value="@categoria.Id" selected>@categoria.Title</option>
-                        }
-                        else
-                        {
-                            <option value="@categoria.Id">@categoria.Title</option>
-
-                        }
+                        <option value="@categoria.Id">@categoria.Title</option>
                     }
                 </select>
+                <span asp-validation-for="Pizza.CategoriaId"></span>
             </div>
             <button type="submit">Modifica ora!</button>
         </form>

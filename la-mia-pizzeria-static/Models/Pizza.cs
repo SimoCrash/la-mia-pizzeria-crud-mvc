@@ -26,6 +26,7 @@ namespace la_mia_pizzeria_static.Models
         //[Range(1, 30, ErrorMessage = "Inserisci il Prezzo della pizza che vuoi aggiungere, superiore a 1.")]
         public string Prezzo { get; set; } = string.Empty;
 
+        [NoZeroOption(ErrorMessage = "Devi inserire almeno un valore.")]
         public int CategoriaId { get; set; }
         public Categoria? Categoria { get; set; }
     }

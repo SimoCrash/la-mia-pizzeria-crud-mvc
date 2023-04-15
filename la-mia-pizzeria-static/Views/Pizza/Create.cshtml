@@ -30,20 +30,13 @@
             <div>
                 <label asp-for="Pizza.CategoriaId">Categoria</label>
                 <select asp-for="Pizza.CategoriaId">
-                    <option value=""></option>
+                    <option value="0"></option>
                     @foreach(Categoria categoria in Model.Categorie)
                     {
-                        @if(Model.Pizza.CategoriaId == categoria.Id)
-                        {
-                            <option value="@categoria.Id" selected>@categoria.Title</option>
-                        }
-                        else
-                        {
-                            <option value="@categoria.Id">@categoria.Title</option>
-
-                        }
+                        <option value="@categoria.Id">@categoria.Title</option>
                     }
                 </select>
+                <span asp-validation-for="Pizza.CategoriaId"></span>
             </div>
             <button type="submit">Crea ora!</button>
         </form>

@@ -78,12 +78,12 @@ namespace la_mia_pizzeria_static.Controllers
 
         [HttpPost] 
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, Pizza pizza)
+        public IActionResult Update(int id, PizzaFormModel form)
         {
 
             if(!ModelState.IsValid)
             { 
-                return View(pizza); 
+                return View(form); 
             }
 
             using var ctx = new PizzeriaContext();
@@ -94,10 +94,10 @@ namespace la_mia_pizzeria_static.Controllers
                 return View($"Non è stato trovato l'id n° {id}");
             }
 
-            pizzaToUpdate.Nome = pizza.Nome;
-            pizzaToUpdate.Descrizione = pizza.Descrizione;
-            pizzaToUpdate.Foto = pizza.Foto;    
-            pizzaToUpdate.Prezzo = pizza.Prezzo;
+            pizzaToUpdate.Nome = form.Pizza.Nome;
+            pizzaToUpdate.Descrizione = form.Pizza.Descrizione;
+            pizzaToUpdate.Foto = form.Pizza.Foto;    
+            pizzaToUpdate.Prezzo = form.Pizza.Prezzo;
 
             ctx.SaveChanges();
 
