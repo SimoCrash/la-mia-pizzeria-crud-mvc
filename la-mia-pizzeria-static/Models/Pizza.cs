@@ -29,6 +29,6 @@ namespace la_mia_pizzeria_static.Models
         [NoZeroOption(ErrorMessage = "Devi inserire almeno un valore.")]
         public int CategoriaId { get; set; }
         public Categoria? Categoria { get; set; }
-        public IEnumerable<Ingrediente>? Ingredienti { get; set; }
+        public List<Ingrediente>? Ingredienti { get; set; }
     }
 }

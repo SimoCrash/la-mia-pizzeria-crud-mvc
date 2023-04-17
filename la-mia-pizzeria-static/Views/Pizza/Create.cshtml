@@ -46,6 +46,10 @@
                 </select>
                 <span asp-validation-for="Pizza.CategoriaId"></span>
             </div>
+            <div>
+                <label asp-for="SelectedIngredienti">Ingredienti</label>
+                <select asp-for="SelectedIngredienti" multiple="multiple" asp-items="@Model.Ingredienti"></select>
+            </div>
             <button type="submit">Crea ora!</button>
         </form>
     </div>
