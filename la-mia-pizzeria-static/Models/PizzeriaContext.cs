@@ -7,6 +7,7 @@ namespace la_mia_pizzeria_static.Models
     {
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Categoria> Categorie { get; set; }
+        public DbSet<Ingrediente> Ingredienti { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -70,6 +71,40 @@ namespace la_mia_pizzeria_static.Models
                 };
 
                 Categorie.AddRange(seed);
+            }
+
+            if(!Ingredienti.Any())
+            {
+                var seed = new Ingrediente[]
+                {
+                    new()
+                    {
+                        Name = "Mozzarella",
+                        Pizzas = pizzaSeed,
+                    },
+                    new()
+                    {
+                        Name = "Mozzarella di Bufala"
+                    },
+                    new()
+                    {
+                        Name = "Pomodoro"
+                    },
+                    new()
+                    {
+                        Name = "Salame Piccante"
+                    },
+                    new()
+                    {
+                        Name = "Patatine Fritte"
+                    },
+                    new()
+                    {
+                        Name = "Wurstel"
+                    }
+                };
+
+                Ingredienti.AddRange(seed);
             }
 
             SaveChanges();
