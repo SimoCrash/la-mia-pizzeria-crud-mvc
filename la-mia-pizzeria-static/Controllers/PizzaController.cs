@@ -72,7 +72,7 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Update(int id)
         {
             using var ctx = new PizzeriaContext();
-            var pizza = ctx.Pizzas.Include(p => p.Ingredienti).FirstOrDefault(p => p.Id == id);
+            var pizza = ctx.Pizzas.Include(p => p.Ingredienti).FirstOrDefault(p => p.Id == id);                                          // *1 RISOLTO CON INCLUDE()
 
             if (pizza == null)
             {
@@ -82,8 +82,8 @@ namespace la_mia_pizzeria_static.Controllers
             var formModel = new PizzaFormModel
             {
                 Pizza = pizza,
-                Categorie = ctx.Categorie.ToArray(),
-                Ingredienti = ctx.Ingredienti.ToArray().Select(i => new SelectListItem(i.Name, i.Id.ToString(), pizza.Ingredienti!.Any(_i => _i.Id == id))).ToArray(), //PROBLEMA QUI
+                Categorie = ctx.Categorie.ToArray(),                                                                                            // *2 i.Id non id per recuperare gli ingredienti selezionati tra le options
+                Ingredienti = ctx.Ingredienti.ToArray().Select(i => new SelectListItem(i.Name, i.Id.ToString(), pizza.Ingredienti!.Any(_i => _i.Id == i.Id))).ToArray(), //PROBLEMA QUI *1 *2
             };
 
             formModel.SelectedIngredienti = formModel.Ingredienti.Where(i => i.Selected).Select(i => i.Value).ToList();
