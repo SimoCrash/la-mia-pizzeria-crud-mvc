@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace la_mia_pizzeria_static.Models
 {
-    public class PizzeriaContext : DbContext
+    public class PizzeriaContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Categoria> Categorie { get; set; }
@@ -104,6 +106,41 @@ namespace la_mia_pizzeria_static.Models
                 };
 
                 Ingredienti.AddRange(seed);
+            }
+
+            if(!Roles.Any())
+            {
+                var seed = new IdentityRole[]
+                {
+                    new("ADMIN"),
+                    new("USER"),
+                };
+
+                Roles.AddRange(seed);
+            }
+
+            if(Users.Any(u => u.Email == "admin@admin.it" || u.Email == "user@user.it") && !UserRoles.Any())
+            {
+                var admin = Users.First(u => u.Email == "admin@admin.it");
+                var user = Users.First(u => u.Email == "user@user.it");
+
+                var adminRole = Roles.First(r => r.Name == "ADMIN");
+                var userRole = Roles.First(r => r.Name == "USER");
+
+                var seed = new IdentityUserRole<string>[]
+                {
+                    new()
+                    {
+                        UserId = admin.Id,
+                        RoleId = adminRole.Id,
+                    },
+
+                    new()
+                    {
+                        UserId = user.Id,
+                        RoleId = userRole.Id,
+                    },
+                };
             }
 
             SaveChanges();

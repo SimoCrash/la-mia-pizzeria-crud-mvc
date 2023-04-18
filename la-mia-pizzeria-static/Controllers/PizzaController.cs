@@ -1,4 +1,5 @@
 ﻿using la_mia_pizzeria_static.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using static System.Net.WebRequestMethods;
 
 namespace la_mia_pizzeria_static.Controllers
 {
+    [Authorize(Roles = "ADMIN,USER")]
     public class PizzaController : Controller
     {
         public IActionResult Index()
@@ -28,6 +30,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(pizza);
         }
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Create()
         {
             using var ctx = new PizzeriaContext();
@@ -41,6 +44,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(formModel);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PizzaFormModel form)
@@ -69,6 +73,7 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         public IActionResult Update(int id)
         {
             using var ctx = new PizzeriaContext();
@@ -91,6 +96,7 @@ namespace la_mia_pizzeria_static.Controllers
             return View(formModel);
         }
 
+        [Authorize(Roles = "ADMIN")]
         [HttpPost] 
         [ValidateAntiForgeryToken]
         public IActionResult Update(int id, PizzaFormModel form)
@@ -126,6 +132,7 @@ namespace la_mia_pizzeria_static.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "ADMIN")]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
