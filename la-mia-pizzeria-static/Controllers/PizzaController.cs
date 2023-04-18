@@ -72,7 +72,7 @@ namespace la_mia_pizzeria_static.Controllers
         public IActionResult Update(int id)
         {
             using var ctx = new PizzeriaContext();
-            var pizza = ctx.Pizzas.FirstOrDefault(p => p.Id == id);
+            var pizza = ctx.Pizzas.Include(p => p.Ingredienti).FirstOrDefault(p => p.Id == id);
 
             if (pizza == null)
             {
@@ -83,7 +83,7 @@ namespace la_mia_pizzeria_static.Controllers
             {
                 Pizza = pizza,
                 Categorie = ctx.Categorie.ToArray(),
-                Ingredienti = ctx.Ingredienti.ToArray().Select(i => new SelectListItem(i.Name, i.Id.ToString(), pizza.Ingredienti!.Any(_i => _i.Id == i.Id))).ToArray(), //PROBLEMA QUI
+                Ingredienti = ctx.Ingredienti.ToArray().Select(i => new SelectListItem(i.Name, i.Id.ToString(), pizza.Ingredienti!.Any(_i => _i.Id == id))).ToArray(), //PROBLEMA QUI
             };
 
             formModel.SelectedIngredienti = formModel.Ingredienti.Where(i => i.Selected).Select(i => i.Value).ToList();
