@@ -4,22 +4,26 @@
 }
 
 <tr>
-    <td>@pizza.Id</td>
-    <td>
-        <a href="@Url.Action("Detail", "Pizza", new{Id = pizza.Id})">@pizza.Nome</a>
-    </td>
-    <td>@pizza.Descrizione</td>
-    <td><img src="@pizza.Foto" /></td>
-    <td>@pizza.Prezzo</td>
-    <td>@pizza.Categoria!.Title</td>
-    <td>
-        <button class="btn-edit"><a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a></button>
-        <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
-            @Html.AntiForgeryToken()
-            <button type="submit" class="btn-delete">Delete</button>
-        </form>
-    </td>
+<td>@pizza.Id</td>
+<td>
+    <a href="@Url.Action("Detail", "Pizza", new{Id = pizza.Id})">@pizza.Nome</a>
+</td>
+<td>@pizza.Descrizione</td>
+<td><img src="@pizza.Foto" /></td>
+<td>@pizza.Prezzo</td>
+<td>@pizza.Categoria!.Title</td>
+    @if (User.IsInRole("ADMIN"))
+    {
+        <td>
+            <button class="btn-edit"><a href="@Url.Action("Update", "Pizza", new { Id = pizza.Id })">Edit</a></button>
+            <form asp-action="Delete" asp-controller="Pizza" asp-route-id="@pizza.Id">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn-delete">Delete</button>
+            </form>
+        </td>
+    }
 </tr>
+
 
 
 

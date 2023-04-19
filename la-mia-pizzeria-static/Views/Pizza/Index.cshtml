@@ -28,10 +28,13 @@
         }
     </style>
 }
+@if (User.IsInRole("ADMIN"))
+{
+    <button class="btn-create">
+        <a href="@Url.Action("Create", "Pizza")">Aggiungi una nuova pizza</a>
+    </button>
+}
 
-<button class="btn-create">
-    <a href="@Url.Action("Create", "Pizza")">Aggiungi una nuova pizza</a>
-</button>
 
 @if(pizzas.Length == 0)
 {
@@ -48,7 +51,10 @@ else
             <th><h3>Foto</h3></th>
             <th><h3>Prezzo</h3></th>
             <th><h3>Categoria</h3></th>
-            <th><h3>Azioni</h3></th>
+            @if (User.IsInRole("ADMIN"))
+            {
+                <th><h3>Azioni</h3></th>
+            }
         </tr>
         @foreach (var pizza in pizzas)
         {
