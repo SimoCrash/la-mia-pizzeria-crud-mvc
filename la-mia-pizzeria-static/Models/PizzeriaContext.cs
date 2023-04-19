@@ -74,7 +74,7 @@ namespace la_mia_pizzeria_static.Models
                 Categorie.AddRange(seed);
             }
 
-            if(!Ingredienti.Any())
+            if (!Ingredienti.Any())
             {
                 var seed = new Ingrediente[]
                 {
@@ -108,7 +108,7 @@ namespace la_mia_pizzeria_static.Models
                 Ingredienti.AddRange(seed);
             }
 
-            if(!Roles.Any())
+            if (!Roles.Any())
             {
                 var seed = new IdentityRole[]
                 {
@@ -141,6 +141,7 @@ namespace la_mia_pizzeria_static.Models
                         RoleId = userRole.Id,
                     },
                 };
+                UserRoles.AddRange(seed);
             }
 
             SaveChanges();
